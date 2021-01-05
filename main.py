@@ -11,7 +11,7 @@ def inputNumber(message):
        return userInput
        break
 k=inputNumber("Entrez une taille de matrice (k)");
-
+k = 2**k
 
 a = []
 b = []
