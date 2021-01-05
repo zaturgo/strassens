@@ -37,5 +37,5 @@ while timeClassic<timeStrassen:
     #timeStrassen = end - start
     timeStrassen = timeClassic-1
 print("----------------------------")
-print("Strassen est plus rapide à partir de k="+str(k))
+print("Strassen est plus rapide à partir de k="+str(k)+" (matrice de taille +"+str(2**k)+")")
 
