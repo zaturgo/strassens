@@ -21,9 +21,9 @@ while timeClassic<timeStrassen:
         a.append(np.random.randint(-9,9,2**k))
         b.append(np.random.randint(-9,9,2**k))
         c.append(np.zeros(2**k))
-    a = np.array(a);
-    b = np.array(b);
-    c = np.array(b);
+    a = np.array(a)
+    b = np.array(b)
+    c = np.array(b)
     start = time.perf_counter()
     classic(a,b,c,2**k)
     end = time.perf_counter()
@@ -36,5 +36,5 @@ while timeClassic<timeStrassen:
     #timeStrassen = end - start
     timeStrassen = timeClassic-1
 print("----------------------------")
-print("Strassen est plus rapide à partir de k="+str(k)+" (matrice de taille +"+str(2**k)+")")
+print("Strassen est plus rapide à partir de k="+str(k)+" (matrice de taille "+str(2**k)+")")
 
