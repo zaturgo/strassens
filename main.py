@@ -4,7 +4,6 @@ import time
 def classic(a,b,c,dim):
     for i in range(dim):
         for j in range(dim):
-            c[i][j] = 0
             for k in range(dim):
                 c[i][j] += a[i][k]*b[k][j]
     return c;
@@ -21,7 +20,7 @@ while timeClassic<timeStrassen:
     for i in range(2**k):
         a.append(np.random.randint(-9,9,2**k))
         b.append(np.random.randint(-9,9,2**k))
-        c.append(np.random.randint(-9,9,2**k))
+        c.append(np.zeros(2**k))
     a = np.array(a);
     b = np.array(b);
     c = np.array(b);
