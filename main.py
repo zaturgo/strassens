@@ -1,18 +1,19 @@
 # coding=utf-8
 import numpy as np
+import time
+
 def inputNumber(message):
   while True:
     try:
        userInput = int(input(message))
     except ValueError:
-       print("Not an integer! Try again.")
+       print("Veuillez entrer un entier")
        continue
     else:
        return userInput
        break
-k=inputNumber("Entrez une taille de matrice (k)");
+k=inputNumber("Entrez une taille de matrice (2^k)");
 k = 2**k
-
 a = []
 b = []
 for i in range(k):
@@ -21,5 +22,6 @@ for i in range(k):
 
 a = np.array(a);
 b = np.array(b);
-print(a)
-print(b)
+start = time.perf_counter()
+end = time.perf_counter()
+print(f"L'exécution a pris {end - start:0.4f} secondes")
