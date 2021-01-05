@@ -33,7 +33,7 @@ while timeClassic<timeStrassen:
     #start = time.perf_counter()
     #strassen(a,b)
     #end = time.perf_counter()
-    #print(f"L'exécution de strassen a pris {end - start:0.4f} secondes")
+    #print(f"L'exécution de strassen a pris {end - start:0.6f} secondes")
     #timeStrassen = end - start
     timeStrassen = timeClassic-1
 print("----------------------------")
