@@ -1,4 +1,8 @@
 # coding=utf-8
+
+#Il existe des algorithmes plus puissants en terme de complexité pour la multiplication de deux matrices (Strassen: O(n2.807)):
+#Le coppersmith winograd a une complexité de O(n2.3737) tandis qu'un algorithme de Josh Alman atteint une complexité de O(n2.3728596) en décembre 2020.
+
 import numpy as np
 import time
 
