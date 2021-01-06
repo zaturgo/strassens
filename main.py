@@ -66,10 +66,10 @@ def classic(a,b,c,dim):
                 c[i][j] += a[i][k]*b[k][j]
     return c;
 
-timeClassic = 1
-timeStrassen = 0
-k = 0;
-while k < 8:
+timeClassic = 0
+timeStrassen = 1
+k = 1;
+while timeStrassen > timeClassic:
     k = k+1
     print("--------------------------")
     print("Execution pour matrice de taille "+str(2**k)+" (k="+str(k)+")")
@@ -99,10 +99,7 @@ while k < 8:
     end = time.perf_counter()
     print(f"L'exécution de strassen a pris {end - start:0.6f} secondes")
     timeStrassen = end - start
+print("--------------------------")
+print("Strassen est plus rapide pour k=" + str(k) + " (matrice de taille " + str(2 ** k) + ")")
 
-    print("----------------------------")
-    if(timeStrassen < timeClassic):
-        print("Strassen est plus rapide pour k="+str(k)+" (matrice de taille "+str(2**k)+")")
-    else:
-    	print("L'algo classique est plus rapide pour k="+str(k)+" (matrice de taille "+str(2**k)+")")
 
