@@ -30,6 +30,35 @@ def strassen(a, b):
 
 	return np.vstack((np.hstack((c11, c12)), np.hstack((c21, c22))))
 
+def classicSplit(a, b):
+	# Si matrice de taille 1, on multiplie a*b
+	if len(a) == 1:
+		return a * b
+
+    # Découpe les matrices
+	rowA, colA = a.shape
+	rowB, colB = b.shape
+	a11, a12, a21, a22 = a[:rowA//2, :colA//2], a[:rowA//2, colA//2:], a[rowA//2:, :colA//2], a[rowA//2:, colA//2:]
+	b11, b12, b21, b22 = b[:rowB//2, :colB//2], b[:rowB//2, colB//2:], b[rowB//2:, :colB//2], b[rowB//2:, colB//2:]
+
+	# Strassen
+	q111 = classicSplit(a11, b11)
+	q112 = classicSplit(a12, b21)
+	q121 = classicSplit(a11, b12)
+	q122 = classicSplit(a12, b22)
+	q211 = classicSplit(a21, b11)
+	q212 = classicSplit(a22, b21)
+	q221 = classicSplit(a21, b12)
+	q222 = classicSplit(a22, b22)
+
+	# Calcul nouvelle matrice
+	c11 = q111 + q112
+	c12 = q121 + q122
+	c21 = q211 + q212
+	c22 = q221 + q222
+
+	return np.vstack((np.hstack((c11, c12)), np.hstack((c21, c22))))
+
 def classic(a,b,c,dim):
     for i in range(dim):
         for j in range(dim):
@@ -40,31 +69,40 @@ def classic(a,b,c,dim):
 timeClassic = 1
 timeStrassen = 0
 k = 0;
-while timeClassic > timeStrassen:
+while k < 8:
     k = k+1
     print("--------------------------")
     print("Execution pour matrice de taille "+str(2**k)+" (k="+str(k)+")")
+
     a = []
     b = []
     c = []
+
     for i in range(2**k):
         a.append(np.random.randint(-9,9,2**k))
         b.append(np.random.randint(-9,9,2**k))
         c.append(np.zeros(2**k))
+
     a = np.array(a)
     b = np.array(b)
     c = np.array(b)
+
     start = time.perf_counter()
-    classic(a,b,c,2**k)
+    #classic(a,b,c,2**k)
+    classicSplit(a,b)
     end = time.perf_counter()
     print(f"L'exécution classique a pris {end - start:0.6f} secondes")
     timeClassic = end - start
+
     start = time.perf_counter()
     strassen(a,b)
     end = time.perf_counter()
     print(f"L'exécution de strassen a pris {end - start:0.6f} secondes")
     timeStrassen = end - start
-    timeStrassen = timeClassic-1
-print("----------------------------")
-print("Strassen est plus rapide à partir de k="+str(k)+" (matrice de taille "+str(2**k)+")")
+
+    print("----------------------------")
+    if(timeStrassen < timeClassic):
+        print("Strassen est plus rapide pour k="+str(k)+" (matrice de taille "+str(2**k)+")")
+    else:
+    	print("L'algo classique est plus rapide pour k="+str(k)+" (matrice de taille "+str(2**k)+")")
 
